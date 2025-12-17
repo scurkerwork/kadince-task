@@ -1,0 +1,107 @@
+# Monorepo .gitignore for Rails + React Application
+
+# ===================================
+# Backend (Rails) Ignores
+# ===================================
+
+# Bundler
+backend/.bundle
+backend/vendor/bundle
+
+# Environment files
+backend/.env*
+!backend/.env.example
+
+# Rails logs and temp files
+backend/log/*
+backend/tmp/*
+!backend/log/.keep
+!backend/tmp/.keep
+backend/tmp/pids/*
+!backend/tmp/pids/
+!backend/tmp/pids/.keep
+
+# Storage and uploads
+backend/storage/*
+!backend/storage/.keep
+backend/tmp/storage/*
+!backend/tmp/storage/
+!backend/tmp/storage/.keep
+
+# Rails encrypted credentials
+backend/config/*.key
+backend/config/master.key
+backend/config/credentials/*.key
+
+# Database
+backend/*.sqlite3
+backend/*.sqlite3-*
+
+# ===================================
+# Frontend (React/Vite) Ignores
+# ===================================
+
+# Dependencies
+frontend/node_modules
+
+# Build outputs
+frontend/dist
+frontend/dist-ssr
+frontend/.vite
+
+# Environment files
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+!frontend/.env.example
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# Editor directories and files
+frontend/.vscode/*
+!frontend/.vscode/extensions.json
+frontend/.idea
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+
+# ===================================
+# Global/OS Ignores
+# ===================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===================================
+# Project-specific
+# ===================================
+
+# Root-level files
+*.log
+.env
+.env.local
