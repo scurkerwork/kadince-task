@@ -32,27 +32,21 @@ const TaskForm = ({ initialData = {}, onSubmit, isSubmitting, title }) => {
     };
 
     return (
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div className="fade-in" style={{ maxWidth: '600px', margin: '0 auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <h2>{title}</h2>
+                <h2 style={{ margin: 0 }}>{title}</h2>
                 <button
                     onClick={() => navigate('/tasks')}
                     type="button"
-                    style={{
-                        padding: '6px 12px',
-                        backgroundColor: 'transparent',
-                        border: '1px solid #ddd',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
-                    }}
+                    className="btn btn-secondary"
                 >
                     Cancel
                 </button>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+            <form onSubmit={handleSubmit} className="card">
                 <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontWeight: 500 }}>Title *</label>
+                    <label className="label">Title *</label>
                     <input
                         type="text"
                         name="title"
@@ -60,30 +54,31 @@ const TaskForm = ({ initialData = {}, onSubmit, isSubmitting, title }) => {
                         onChange={handleChange}
                         required
                         placeholder="What needs to be done?"
-                        style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd', boxSizing: 'border-box' }}
+                        className="input-control"
                     />
                 </div>
 
                 <div style={{ marginBottom: '15px' }}>
-                    <label style={{ display: 'block', marginBottom: '5px', fontWeight: 500 }}>Description</label>
+                    <label className="label">Description</label>
                     <textarea
                         name="description"
                         value={formData.description || ''}
                         onChange={handleChange}
                         rows="4"
                         placeholder="Add details..."
-                        style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd', boxSizing: 'border-box', fontFamily: 'inherit' }}
+                        className="input-control"
+                        style={{ fontFamily: 'inherit' }}
                     />
                 </div>
 
                 <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
                     <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 500 }}>Priority</label>
+                        <label className="label">Priority</label>
                         <select
                             name="priority"
                             value={formData.priority}
                             onChange={handleChange}
-                            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+                            className="input-control"
                         >
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
@@ -92,13 +87,13 @@ const TaskForm = ({ initialData = {}, onSubmit, isSubmitting, title }) => {
                     </div>
 
                     <div style={{ flex: 1 }}>
-                        <label style={{ display: 'block', marginBottom: '5px', fontWeight: 500 }}>Due Date</label>
+                        <label className="label">Due Date</label>
                         <input
                             type="date"
                             name="due_date"
                             value={formData.due_date || ''}
                             onChange={handleChange}
-                            style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd', boxSizing: 'border-box' }}
+                            className="input-control"
                         />
                     </div>
                 </div>
@@ -107,15 +102,8 @@ const TaskForm = ({ initialData = {}, onSubmit, isSubmitting, title }) => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        style={{
-                            padding: '10px 20px',
-                            backgroundColor: '#007bff',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                            opacity: isSubmitting ? 0.7 : 1
-                        }}
+                        className="btn btn-primary"
+                        style={{ opacity: isSubmitting ? 0.7 : 1 }}
                     >
                         {isSubmitting ? 'Saving...' : 'Save Task'}
                     </button>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createTask } from '../../api/tasks';
+import { useToast } from '../../context/ToastContext';
 import TaskForm from './TaskForm';
 
 const CreateTask = () => {
     const navigate = useNavigate();
+    const { addToast } = useToast();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
 
@@ -13,10 +15,13 @@ const CreateTask = () => {
             setIsSubmitting(true);
             setError(null);
             await createTask(formData);
+            addToast('Task created successfully', 'success');
             navigate('/tasks');
         } catch (err) {
             console.error('Failed to create task:', err);
-            setError(err.message || 'Failed to create task. Please try again.');
+            const errorMessage = err.message || 'Failed to create task. Please try again.';
+            setError(errorMessage);
+            addToast(errorMessage, 'error');
         } finally {
             setIsSubmitting(false);
         }

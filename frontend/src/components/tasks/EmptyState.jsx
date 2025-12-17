@@ -1,30 +1,24 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EmptyState = ({ message, actionLabel, onAction }) => {
+    const navigate = useNavigate();
+
     return (
-        <div style={{
+        <div className="card" style={{
             textAlign: 'center',
             padding: '40px 20px',
-            backgroundColor: '#f8f9fa',
-            borderRadius: '8px',
-            color: '#6c757d'
+            color: 'var(--text-secondary)'
         }}>
             <div style={{ fontSize: '48px', marginBottom: '16px' }}>📝</div>
             <h3>No tasks found</h3>
             <p style={{ marginBottom: '24px' }}>{message || "You don't have any tasks yet."}</p>
-            {onAction && (
+            {actionLabel && (
                 <button
-                    onClick={onAction}
-                    style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#007bff',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '4px',
-                        cursor: 'pointer'
-                    }}
+                    onClick={onAction || (() => navigate('/tasks/new'))}
+                    className="btn btn-primary"
                 >
-                    {actionLabel || 'Create Task'}
+                    {actionLabel}
                 </button>
             )}
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchTasks, deleteTask, toggleTaskCompletion } from '../../api/tasks';
+import { useToast } from '../../context/ToastContext';
 import TaskItem from './TaskItem';
 import TaskFilters from './TaskFilters';
 import EmptyState from './EmptyState';
@@ -9,6 +10,7 @@ const TaskList = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { addToast } = useToast();
 
     // Filters
     const [statusFilter, setStatusFilter] = useState('all');
@@ -46,11 +48,12 @@ const TaskList = () => {
             ));
 
             await toggleTaskCompletion(id);
+            addToast('Task status updated', 'success');
         } catch (err) {
             // Revert on error
             console.error('Failed to toggle task:', err);
             loadTasks();
-            alert('Failed to update task status');
+            addToast('Failed to update task status', 'error');
         }
     };
 
@@ -61,16 +64,17 @@ const TaskList = () => {
             // Optimistic update
             setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
             await deleteTask(id);
+            addToast('Task deleted successfully', 'success');
         } catch (err) {
             console.error('Failed to delete task:', err);
             loadTasks();
-            alert('Failed to delete task');
+            addToast('Failed to delete task', 'error');
         }
     };
 
     if (loading && tasks.length === 0) {
         return (
-            <div style={{ textAlign: 'center', padding: '40px' }}>
+            <div style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
                 <p>Loading tasks...</p>
             </div>
         );
@@ -78,15 +82,15 @@ const TaskList = () => {
 
     if (error) {
         return (
-            <div style={{ padding: '20px', color: '#dc3545', backgroundColor: '#f8d7da', borderRadius: '4px' }}>
+            <div style={{ padding: '20px', color: 'var(--danger-color)', backgroundColor: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)' }}>
                 {error}
-                <button onClick={loadTasks} style={{ marginLeft: '10px' }}>Retry</button>
+                <button onClick={loadTasks} className="btn btn-secondary" style={{ marginLeft: '10px' }}>Retry</button>
             </div>
         );
     }
 
     return (
-        <div>
+        <div className="fade-in">
             <div style={{
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -96,14 +100,8 @@ const TaskList = () => {
                 <h2 style={{ margin: 0 }}>My Tasks</h2>
                 <Link
                     to="/tasks/new"
-                    style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#007bff',
-                        color: 'white',
-                        textDecoration: 'none',
-                        borderRadius: '4px',
-                        fontWeight: 500
-                    }}
+                    className="btn btn-primary"
+                    style={{ textDecoration: 'none' }}
                 >
                     + New Task
                 </Link>
@@ -127,7 +125,7 @@ const TaskList = () => {
                     onAction={!(statusFilter !== 'all' || priorityFilter) ? () => window.location.href = '/tasks/new' : null}
                 />
             ) : (
-                <div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {tasks.map(task => (
                         <TaskItem
                             key={task.id}
