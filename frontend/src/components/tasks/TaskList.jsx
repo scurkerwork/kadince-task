@@ -5,6 +5,7 @@ import { useToast } from '../../context/ToastContext';
 import TaskItem from './TaskItem';
 import TaskFilters from './TaskFilters';
 import EmptyState from './EmptyState';
+import SearchBar from './SearchBar';
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
@@ -15,6 +16,7 @@ const TaskList = () => {
     // Filters
     const [statusFilter, setStatusFilter] = useState('all');
     const [priorityFilter, setPriorityFilter] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const loadTasks = async () => {
         try {
@@ -24,6 +26,7 @@ const TaskList = () => {
 
             if (statusFilter !== 'all') params.status = statusFilter;
             if (priorityFilter) params.priority = priorityFilter;
+            if (searchQuery) params.search = searchQuery;
 
             const data = await fetchTasks(params);
             setTasks(data);
@@ -38,7 +41,7 @@ const TaskList = () => {
     // Reload tasks when filters change
     useEffect(() => {
         loadTasks();
-    }, [statusFilter, priorityFilter]);
+    }, [statusFilter, priorityFilter, searchQuery]);
 
     const handleToggle = async (id) => {
         try {
@@ -106,6 +109,8 @@ const TaskList = () => {
                     + New Task
                 </Link>
             </div>
+
+            <SearchBar onSearch={setSearchQuery} initialValue={searchQuery} />
 
             <TaskFilters
                 statusFilter={statusFilter}

@@ -11,6 +11,12 @@ class Task < ApplicationRecord
   scope :by_priority, -> { order(priority: :desc) }
   scope :by_due_date, -> { order(due_date: :asc) }
   scope :by_created_at, -> { order(created_at: :desc) }
+  
+  # Search scope for title and description
+  scope :search, ->(query) {
+    return all if query.blank?
+    where("title ILIKE ? OR description ILIKE ?", "%#{query}%", "%#{query}%")
+  }
 
   # Instance methods
   def toggle_completed!

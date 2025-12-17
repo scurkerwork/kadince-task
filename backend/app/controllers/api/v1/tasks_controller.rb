@@ -9,6 +9,7 @@ class Api::V1::TasksController < ApplicationController
     # Apply filters
     @tasks = filter_by_status(@tasks, params[:status]) if params[:status].present?
     @tasks = filter_by_priority(@tasks, params[:priority]) if params[:priority].present?
+    @tasks = @tasks.search(params[:search]) if params[:search].present?
 
     # Apply sorting
     @tasks = apply_sorting(@tasks, params[:sort], params[:order])

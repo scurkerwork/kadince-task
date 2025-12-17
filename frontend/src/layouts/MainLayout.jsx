@@ -28,10 +28,6 @@ const MainLayout = () => {
             <main className="fade-in">
                 <Outlet />
             </main>
-
-            <footer style={{ marginTop: '50px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                <p>&copy; {new Date().getFullYear()} MyTodo</p>
-            </footer>
         </div>
     );
 };
