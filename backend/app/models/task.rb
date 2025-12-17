@@ -1,10 +1,9 @@
 class Task < ApplicationRecord
   # Enums
-  enum priority: { low: 0, medium: 1, high: 2 }
+  enum :priority, { low: 0, medium: 1, high: 2 }, default: :low
 
   # Validations
   validates :title, presence: true
-  validates :priority, inclusion: { in: priorities.keys }
 
   # Scopes
   scope :pending, -> { where(completed: false) }
