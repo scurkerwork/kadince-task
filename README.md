@@ -39,13 +39,25 @@ A full-stack task management application built with Ruby on Rails (backend) and 
    bundle install
    ```
 
-3. Setup database:
+3. Configure environment variables:
+   Create a `.env` file in the `backend` directory with your database credentials:
+   ```bash
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USERNAME=postgres
+   DB_PASSWORD=your_password_here
+   DB_NAME=task_list_development
+   ```
+   
+   > **Note**: The `.env` file is ignored by Git for security. Never commit credentials to version control.
+
+4. Setup database:
    ```bash
    rails db:create
    rails db:migrate
    ```
 
-4. Start the Rails server:
+5. Start the Rails server:
    ```bash
    rails server
    ```
