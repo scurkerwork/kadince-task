@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import TaskList from './components/tasks/TaskList';
 
 // Placeholder components for routes (will be implemented in next steps)
-const TaskList = () => <div><h2>Task List</h2><p>Coming soon...</p></div>;
 const CreateTask = () => <div><h2>Create Task</h2><p>Coming soon...</p></div>;
 const EditTask = () => <div><h2>Edit Task</h2><p>Coming soon...</p></div>;
 
