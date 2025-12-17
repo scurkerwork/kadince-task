@@ -70,6 +70,7 @@ test:
 # Production environment uses DATABASE_URL from Render PostgreSQL
 # Render automatically provides this when you add a PostgreSQL database
 production:
+  url: <%= ENV["DATABASE_URL"] %>
   primary: &primary_production
     <<: *default
     url: <%= ENV['DATABASE_URL'] %>
