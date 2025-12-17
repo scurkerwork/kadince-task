@@ -1,4 +1,4 @@
-# Task List Application
+# MyTodo Application
 
 A full-stack task management application built with Ruby on Rails (backend) and React.js (frontend).
 
