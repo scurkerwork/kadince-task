@@ -15,7 +15,7 @@ const MainLayout = () => {
                 justifyContent: 'space-between',
                 alignItems: 'center'
             }}>
-                <h1 style={{ margin: 0, color: 'var(--primary-color)' }}>Task Manager</h1>
+                <h1 style={{ margin: 0, color: 'var(--primary-color)' }}>MyTodo</h1>
                 <button
                     onClick={toggleTheme}
                     className="btn btn-secondary"
@@ -30,7 +30,7 @@ const MainLayout = () => {
             </main>
 
             <footer style={{ marginTop: '50px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                <p>&copy; {new Date().getFullYear()} Task Manager App</p>
+                <p>&copy; {new Date().getFullYear()} MyTodo</p>
             </footer>
         </div>
     );
